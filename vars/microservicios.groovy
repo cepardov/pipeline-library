@@ -1,5 +1,5 @@
 def call(String test) {
-    if (test == 'ms') {
+    if (test == "ms") {
         pipeline {
             agent any
             stages {
