@@ -1,9 +1,6 @@
 def call() {
     pipeline {
         agent any
-        triggers {
-            pollSCM '* * * * *'
-        }
         stages {
             stage("Gradle Version") {
                 steps {
