@@ -2,6 +2,11 @@ def call() {
     pipeline {
         agent any
         stages {
+            stage("Hello") {
+                steps {
+                    sh "echo 'hello'"
+                }
+            }
             stage("Gradle Version") {
                 steps {
                     sh "./gradlew --version"
