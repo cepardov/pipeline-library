@@ -1,40 +1,32 @@
-def call(String pipeline) {
-    if (pipeline == "microservicio") {
-        pipeline {
-            agent any
-            stages {
-                stage("Gradle Version") {
-                    steps {
-                        sh "./gradlew --version"
-                    }
-                }
-                stage("Cleaning workspace") {
-                    steps {
-                        sh "./gradlew clean"
-                    }
-                }
-                stage('Build') {
-                    steps {
-                        sh './gradlew build'
-                    }
-                }
-                stage('Test') {
-                    steps {
-                        sh './gradlew test'
-                    }
+def call() {
+    pipeline {
+        agent any
+        stages {
+            stage("Gradle Version") {
+                steps {
+                    sh "./gradlew --version"
                 }
             }
-
-            post {
-                always {
-                    deleteDir()
+            stage("Cleaning workspace") {
+                steps {
+                    sh "./gradlew clean"
+                }
+            }
+            stage('Build') {
+                steps {
+                    sh './gradlew build'
+                }
+            }
+            stage('Test') {
+                steps {
+                    sh './gradlew test'
                 }
             }
         }
-    } else {
-        pipeline {
-            agent any
-            stages {
+
+        post {
+            always {
+                deleteDir()
             }
         }
     }
