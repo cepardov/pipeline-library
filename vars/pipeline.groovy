@@ -1,13 +1,8 @@
-def call(String test) {
-    if (test == "ms") {
+def call(String pipeline) {
+    if (pipeline == "microservicio") {
         pipeline {
             agent any
             stages {
-                stage("Hello") {
-                    steps {
-                        sh "echo 'hello'"
-                    }
-                }
                 stage("Gradle Version") {
                     steps {
                         sh "./gradlew --version"
