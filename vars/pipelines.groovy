@@ -1,5 +1,5 @@
-def call(String pipeline) {
-    if (pipeline == "microservicio") {
+def call(String tipo) {
+    if (tipo == "microservicio") {
         pipeline {
             agent any
             stages {
@@ -35,6 +35,11 @@ def call(String pipeline) {
         pipeline {
             agent any
             stages {
+                stage("Gradle Version") {
+                    steps {
+                        sh "./gradlew --version"
+                    }
+                }
             }
         }
     }
