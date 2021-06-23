@@ -6,14 +6,13 @@ def call(String tipo) {
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
-                PJ_VER = valuesYaml.version
             }
             stages {
                 stage("Configuring pipeline") {
                     steps {
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
-                        sh 'echo $PJ_VER'
+                        echo valuesYaml.version
                     }
                 }
                 stage("Gradle Version") {
