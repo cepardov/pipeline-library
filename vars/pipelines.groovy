@@ -3,7 +3,7 @@ def call(String tipo) {
         pipeline {
             agent any
             environment {
-                BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                BRANCH = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
             }
             stages {
                 stage("Configuring pipeline") {
