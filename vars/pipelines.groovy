@@ -1,11 +1,20 @@
+def loadValuesYaml(){
+    def valuesYaml = readYaml (file: 'develop.yml')
+    return valuesYaml
+}
 def call(String tipo) {
     if (tipo == "microservicio") {
         pipeline {
             agent any
-            node {
-                datas = readYaml file: 'develop.yml'
+            environment {
+                valuesYaml = loadValuesYaml()
             }
             stages {
+                stage("Configuration Pipeline") {
+                    steps {
+                        sh "echo $valuesYaml.version"
+                    }
+                }
                 stage("Gradle Version") {
                     steps {
                         sh "./gradlew --version"
