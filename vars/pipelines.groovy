@@ -53,6 +53,14 @@ def call(String tipo) {
                         sh 'sudo cp build/libs/service.jar /opt/$PROJECT_NAME/$BRANCH/service/'
                     }
                 }
+                stage('Set Permissions') {
+                    steps {
+                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
+                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/service/stop.sh'
+                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/startNodes.sh'
+                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/stopNodes.sh'
+                    }
+                }
             }
 
             /*post {
