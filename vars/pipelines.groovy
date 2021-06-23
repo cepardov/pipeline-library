@@ -10,10 +10,10 @@ def call(String tipo) {
             stages {
                 stage("Configuring pipeline") {
                     steps {
-                        datas = readYaml (file: 'develop.yml')
+                        def datas = readYaml (file: 'develop.yml')
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
-                        sh 'echo ${datas.version}'
+                        sh 'echo ' + datas.version
                     }
                 }
                 stage("Gradle Version") {
