@@ -3,7 +3,7 @@ def call(String tipo) {
         pipeline {
             agent any
             environment {
-                BRANCH = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
+                BRANCH = getBrachName()
             }
             stages {
                 stage("Configuring pipeline") {
@@ -71,5 +71,17 @@ def call(String tipo) {
                 }
             }
         }
+    }
+}
+
+def getBrachName() {
+    def origin = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
+    String[] originSplited = origin.split('/')
+    int splitNumber = originSplited.length
+
+    if (splitNumber == 2) {
+        return originSplited[2]
+    } else {
+        return 'develop'
     }
 }
