@@ -1,6 +1,5 @@
-import hudson.model.*
+#!/usr/bin/env groovy
 def call(String tipo) {
-    loadValuesYaml()
     if (tipo == "microservicio") {
         pipeline {
             agent any
@@ -11,8 +10,10 @@ def call(String tipo) {
             stages {
                 stage("Configuring pipeline") {
                     steps {
+                        def test = loadValuesYaml()
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
+                        echo test.version
                     }
                 }
                 stage("Gradle Version") {
