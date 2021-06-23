@@ -76,7 +76,7 @@ def call(String tipo) {
     }
 }
 def getProjectName() {
-    def originalJob = System.getenv("JOB_NAME")
+    def originalJob = env.JOB_NAME
     println('original job: ' + originalJob)
     String[] originSplited = originalJob.split('/') as String[]
     int splitNumber = originSplited.length
@@ -91,7 +91,7 @@ def getProjectName() {
     }
 }
 def getBrachName() {
-    def originalJob = System.getenv("JOB_NAME")
+    def originalJob = env.JOB_NAME
     println('original job: ' + originalJob)
     String[] originSplited = originalJob.split('/') as String[]
     int splitNumber = originSplited.length
