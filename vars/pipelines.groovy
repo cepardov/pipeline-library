@@ -6,7 +6,7 @@ def call(String tipo) {
             stages {
                 stage("Configuring pipeline") {
                     steps {
-                        echo branchName
+                        sh 'echo ' + branchName
                     }
                 }
                 stage("Gradle Version") {
