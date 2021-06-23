@@ -76,8 +76,10 @@ def call(String tipo) {
 
 def getBrachName() {
     def origin = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
-    String[] originSplited = origin.split('/')
+    println('origin is ' + origin)
+    String[] originSplited = origin.split('/') as String[]
     int splitNumber = originSplited.length
+    println("number: " + splitNumber)
 
     if (splitNumber == 2) {
         println('brach recognised')
