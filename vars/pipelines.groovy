@@ -3,6 +3,7 @@ def loadValuesYaml(){
     return valuesYaml
 }
 def call(String tipo) {
+    def valuesYaml
     if (tipo == "microservicio") {
         pipeline {
             agent any
@@ -11,14 +12,12 @@ def call(String tipo) {
             }
             stages {
                 stage("Configuration Pipeline") {
-                    steps {
-                        sh "echo $valuesYaml.version"
-                    }
+                    echo valuesYaml
                 }
                 stage("Gradle Version") {
                     steps {
                         sh "./gradlew --version"
-                        sh "echo '${datas.version}'"
+                        sh "echo '${valuesYaml.version}'"
                     }
                 }
                 stage("Cleaning workspace") {
