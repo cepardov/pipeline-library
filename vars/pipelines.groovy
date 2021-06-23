@@ -1,12 +1,14 @@
 def call(String tipo) {
-    def branchName = sh(label: 'getBranchName', returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
     if (tipo == "microservicio") {
         pipeline {
             agent any
+            environment {
+                BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+            }
             stages {
                 stage("Configuring pipeline") {
                     steps {
-                        sh 'echo ' + branchName
+                        sh 'echo $BRANCH'
                     }
                 }
                 stage("Gradle Version") {
