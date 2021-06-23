@@ -45,12 +45,12 @@ def call(String tipo) {
                     steps {
                         sh 'echo /opt/$PROJECT_NAME/$BRANCH'
                         sh 'sudo mkdir -p /opt/$PROJECT_NAME/$BRANCH'
-                        sh 'cp -r deploy/* /opt/$PROJECT_NAME/$BRANCH'
+                        sh 'sudo cp -r deploy/* /opt/$PROJECT_NAME/$BRANCH'
                     }
                 }
                 stage('Installing service') {
                     steps {
-                        sh 'cp build/libs/service.jar /opt/$PROJECT_NAME/$BRANCH/service/'
+                        sh 'sudo cp build/libs/service.jar /opt/$PROJECT_NAME/$BRANCH/service/'
                     }
                 }
             }
