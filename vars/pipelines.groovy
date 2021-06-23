@@ -16,6 +16,8 @@ def call(String tipo) {
                 stage('Build') {
                     steps {
                         sh './gradlew build'
+                        sh 'pwd'
+                        sh 'ls'
                     }
                 }
                 stage('Test') {
