@@ -9,6 +9,7 @@ def call(String tipo) {
                 stage("Configuring pipeline") {
                     steps {
                         sh 'echo $BRANCH'
+                        sh 'echo $PROMOTED_JOB_NAME'
                     }
                 }
                 stage("Gradle Version") {
