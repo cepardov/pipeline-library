@@ -3,13 +3,14 @@ def call(String tipo) {
         pipeline {
             agent any
             environment {
+                PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
             }
             stages {
                 stage("Configuring pipeline") {
                     steps {
                         sh 'echo $BRANCH'
-                        sh 'echo $JOB_NAME'
+                        sh 'echo $PROJECT_NAME'
                     }
                 }
                 stage("Gradle Version") {
@@ -74,19 +75,33 @@ def call(String tipo) {
         }
     }
 }
-
-def getBrachName() {
-    def origin = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
-    println('origin is ' + origin)
-    String[] originSplited = origin.split('/') as String[]
+def getProjectName() {
+    def originalJob = System.getenv("JOB_NAME")
+    println('original job: ' + originalJob)
+    String[] originSplited = originalJob.split('/') as String[]
     int splitNumber = originSplited.length
     println("number: " + splitNumber)
 
     if (splitNumber == 3) {
-        println('brach recognised')
+        println('project name recognized')
+        return originSplited[1]
+    } else {
+        println('project namet recognized')
+        return 'undefined'
+    }
+}
+def getBrachName() {
+    def originalJob = System.getenv("JOB_NAME")
+    println('original job: ' + originalJob)
+    String[] originSplited = originalJob.split('/') as String[]
+    int splitNumber = originSplited.length
+    println("number: " + splitNumber)
+
+    if (splitNumber == 3) {
+        println('brach recognized')
         return originSplited[2]
     } else {
-        println('brach not recognised')
+        println('brach not recognized')
         return 'develop'
     }
 }
