@@ -1,4 +1,5 @@
 def call(String tipo) {
+    loadValuesYaml()
     if (tipo == "microservicio") {
         pipeline {
             agent any
@@ -111,4 +112,9 @@ def getBrachName() {
         println('brach not recognized')
         return 'develop'
     }
+}
+def loadValuesYaml(){
+    def valuesYaml = readYaml (file: 'develop.yml')
+    println('version: ' + valuesYaml.version)
+    return valuesYaml
 }
