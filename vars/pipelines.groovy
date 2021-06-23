@@ -1,6 +1,5 @@
 def call(String tipo) {
     if (tipo == "microservicio") {
-        def valuesYaml = readYaml (file: 'develop.yml')
         pipeline {
             agent any
             environment {
@@ -12,7 +11,6 @@ def call(String tipo) {
                     steps {
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
-                        echo valuesYaml.version
                     }
                 }
                 stage("Gradle Version") {
