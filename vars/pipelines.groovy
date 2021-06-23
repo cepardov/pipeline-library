@@ -10,10 +10,9 @@ def call(String tipo) {
             stages {
                 stage("Configuring pipeline") {
                     steps {
-                        def datas = readYaml (file: 'develop.yml')
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
-                        sh 'echo ' + datas.version
+                        sh 'echo ' + getPort()
                     }
                 }
                 stage("Gradle Version") {
@@ -114,4 +113,16 @@ def getBrachName() {
         println('brach not recognized')
         return 'develop'
     }
+}
+def getPort() {
+    def conf = readYaml file: "develop.yml"
+    String port = ""
+    if ( conf.server.port instanceof Integer ) {
+        port = conf.server.port
+    }
+    if ( conf.server.port instanceof ArrayList ) {
+        port = conf.server.port[0]
+    }
+    println(port)
+    return port
 }
