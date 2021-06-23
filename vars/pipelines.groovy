@@ -81,9 +81,9 @@ def getBrachName() {
     int splitNumber = originSplited.length
     println("number: " + splitNumber)
 
-    if (splitNumber == 2) {
+    if (splitNumber === 3) {
         println('brach recognised')
-        return originSplited[2]
+        return originSplited[3]
     } else {
         println('brach not recognised')
         return 'develop'
