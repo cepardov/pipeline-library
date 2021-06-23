@@ -118,9 +118,11 @@ def getPort() {
     def conf = readYaml file: "develop.yml"
     String port = ""
     if ( conf.server.port instanceof Integer ) {
+        println("1")
         port = conf.server.port
     }
     if ( conf.server.port instanceof ArrayList ) {
+        println("2")
         port = conf.server.port[0]
     }
     println(port)
