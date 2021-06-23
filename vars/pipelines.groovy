@@ -2,11 +2,7 @@
 def call(String tipo) {
     if (tipo == "microservicio") {
         pipeline {
-            agent {
-                node {
-                    datas = readYaml file: "develop.yml"
-                }
-            }
+            agent any
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
@@ -14,8 +10,10 @@ def call(String tipo) {
             stages {
                 stage("Configuring pipeline") {
                     steps {
+                        datas = readYaml (file: 'develop.yml')
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
+                        sh 'echo ${datas.version}'
                     }
                 }
                 stage("Gradle Version") {
