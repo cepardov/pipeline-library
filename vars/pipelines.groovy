@@ -13,13 +13,12 @@ def call(String tipo) {
             stages {
                 stage("Configuration Pipeline") {
                     steps {
-                        sh "echo $valuesYaml.version"
+                        sh '''echo '''+valuesYaml.version
                     }
                 }
                 stage("Gradle Version") {
                     steps {
                         sh "./gradlew --version"
-                        sh "echo '${valuesYaml.version}'"
                     }
                 }
                 stage("Cleaning workspace") {
