@@ -1,12 +1,12 @@
 def call(String tipo) {
     if (tipo == "microservicio") {
-        def configvalues = loadValuesYaml()
+        def valuesYaml = readYaml (file: 'develop.yml')
         pipeline {
             agent any
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
-                PJ_VER = configvalues.version
+                PJ_VER = valuesYaml.version
             }
             stages {
                 stage("Configuring pipeline") {
@@ -114,8 +114,4 @@ def getBrachName() {
         println('brach not recognized')
         return 'develop'
     }
-}
-def loadValuesYaml(){
-    def valuesYaml = readYaml (file: 'develop.yml')
-    return valuesYaml
 }
