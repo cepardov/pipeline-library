@@ -5,12 +5,14 @@ def call(String tipo) {
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
+                CONFIG = loadValuesYaml()
             }
             stages {
                 stage("Configuring pipeline") {
                     steps {
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
+                        sh 'echo $CONFIG.version'
                     }
                 }
                 stage("Gradle Version") {
@@ -111,4 +113,8 @@ def getBrachName() {
         println('brach not recognized')
         return 'develop'
     }
+}
+def loadValuesYaml(){
+    def valuesYaml = readYaml (file: 'develop.yml')
+    return valuesYaml
 }
