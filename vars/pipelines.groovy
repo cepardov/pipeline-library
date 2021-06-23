@@ -43,15 +43,13 @@ def call(String tipo) {
                 }
                 stage('Create Directory') {
                     steps {
-                        sh 'pwd'
-                        sh 'cp -r deploy/product-dal/ /opt'
+                        sh 'mkdir -p /opt/$PROJECT_NAME/$BRANCH'
+                        sh 'cp -r deploy/* /opt/$PROJECT_NAME/$BRANCH'
                     }
                 }
                 stage('Installing service') {
                     steps {
-                        sh 'cp build/libs/service.jar /opt/product-dal/service/'
-                        sh 'cd /opt/product-dal/service/'
-                        sh 'ls'
+                        sh 'cp build/libs/service.jar /opt/$PROJECT_NAME/$BRANCH/service/'
                     }
                 }
             }
