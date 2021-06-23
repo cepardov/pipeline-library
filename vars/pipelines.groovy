@@ -1,9 +1,5 @@
-def loadValuesYaml(){
-    def valuesYaml = readYaml (file: 'develop.yml')
-    return valuesYaml
-}
 def call(String tipo) {
-    def valuesYaml
+    def branchName = getCurrentBranch()
     if (tipo == "microservicio") {
         pipeline {
             agent any
@@ -11,9 +7,9 @@ def call(String tipo) {
                 valuesYaml = loadValuesYaml()
             }
             stages {
-                stage("Configuration Pipeline") {
+                stage("Configuring pipeline") {
                     steps {
-                        sh '''echo '''+valuesYaml.version
+                        echo branchName
                     }
                 }
                 stage("Gradle Version") {
@@ -77,4 +73,11 @@ def call(String tipo) {
             }
         }
     }
+}
+
+def getCurrentBranch () {
+    return sh (
+            script: 'git rev-parse --abbrev-ref HEAD',
+            returnStdout: true
+    ).trim()
 }
