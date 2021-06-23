@@ -1,3 +1,4 @@
+import hudson.model.*
 def call(String tipo) {
     loadValuesYaml()
     if (tipo == "microservicio") {
