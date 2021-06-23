@@ -2,10 +2,14 @@ def call(String tipo) {
     if (tipo == "microservicio") {
         pipeline {
             agent any
+            node {
+                datas = readYaml file: 'develop.yml'
+            }
             stages {
                 stage("Gradle Version") {
                     steps {
                         sh "./gradlew --version"
+                        sh "echo '${datas.version}'"
                     }
                 }
                 stage("Cleaning workspace") {
