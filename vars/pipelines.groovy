@@ -43,6 +43,7 @@ def call(String tipo) {
                 }
                 stage('Create Directory') {
                     steps {
+                        sh 'echo /opt/$PROJECT_NAME/$BRANCH'
                         sh 'sudo mkdir -p /opt/$PROJECT_NAME/$BRANCH'
                         sh 'cp -r deploy/* /opt/$PROJECT_NAME/$BRANCH'
                     }
