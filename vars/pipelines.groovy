@@ -16,7 +16,19 @@ def call(String tipo) {
                 stage('Build') {
                     steps {
                         sh './gradlew build'
-                        sh 'pwd'
+                    }
+                }
+                stage('Create Directory') {
+                    steps {
+                        sh 'cd deploy'
+                        sh 'cp product-dal /opt'
+                        sh 'cd ..'
+                    }
+                }
+                stage('Installing service') {
+                    steps {
+                        sh 'cp /build/libs/service.jar /opt/product-dal/service/'
+                        sh 'cd /opt/product-dal/service/'
                         sh 'ls'
                     }
                 }
@@ -27,11 +39,11 @@ def call(String tipo) {
                 }
             }
 
-            post {
+            /*post {
                 always {
                     deleteDir()
                 }
-            }
+            }*/
         }
     } else {
         pipeline {
