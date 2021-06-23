@@ -1,18 +1,18 @@
 def call(String tipo) {
     if (tipo == "microservicio") {
+        def configvalues = loadValuesYaml()
         pipeline {
             agent any
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
-                CONFIG = loadValuesYaml()
             }
             stages {
                 stage("Configuring pipeline") {
                     steps {
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
-                        sh 'echo $CONFIG.version'
+                        sh 'echo ' + configvalues.version
                     }
                 }
                 stage("Gradle Version") {
