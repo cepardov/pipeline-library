@@ -3,9 +3,6 @@ def call(String tipo) {
     if (tipo == "microservicio") {
         pipeline {
             agent any
-            environment {
-                valuesYaml = loadValuesYaml()
-            }
             stages {
                 stage("Configuring pipeline") {
                     steps {
