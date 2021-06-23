@@ -83,7 +83,7 @@ def getBrachName() {
 
     if (splitNumber == 3) {
         println('brach recognised')
-        return originSplited[3]
+        return originSplited[2]
     } else {
         println('brach not recognised')
         return 'develop'
