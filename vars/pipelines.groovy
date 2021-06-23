@@ -34,9 +34,7 @@ def call(String tipo) {
                 stage('Create Directory') {
                     steps {
                         sh 'pwd'
-                        sh 'cd deploy/'
-                        sh 'cp -r product-dal/ /opt'
-                        sh 'cd ..'
+                        sh 'cp -r deploy/product-dal/ /opt'
                     }
                 }
                 stage('Installing service') {
