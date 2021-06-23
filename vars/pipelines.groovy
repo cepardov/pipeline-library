@@ -12,7 +12,9 @@ def call(String tipo) {
             }
             stages {
                 stage("Configuration Pipeline") {
-                    echo valuesYaml
+                    steps {
+                        sh "echo '${valuesYaml.version}'"
+                    }
                 }
                 stage("Gradle Version") {
                     steps {
