@@ -6,9 +6,14 @@ def call(String tipo) {
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
-                PORT = 9876
             }
             stages {
+                stage("Get data") {
+                    steps {
+                        sh "echo '9090' > $BRANCH"
+                        PORT = sh (returnStdout: true, script: 'cat $BRANCH').trim()
+                    }
+                }
                 stage("Configuring pipeline") {
                     when {
                         expression { PORT != null }
