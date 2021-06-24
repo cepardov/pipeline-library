@@ -69,6 +69,7 @@ def call(String tipo) {
                         PORT = getPort()
                     }
                     steps {
+                        sh 'echo $PORT'
                         sh 'sudo /opt/$PROJECT_NAME/$BRANCH/service/./start.sh $PORT'
                     }
                 }
