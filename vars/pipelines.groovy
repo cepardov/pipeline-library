@@ -18,7 +18,7 @@ def call(String tipo) {
                 }
                 stage("Configuring pipeline") {
                     when {
-                        expression { PORT != null }
+                        environment name: 'PORT', value: 'NA'
                     }
                     input {
                         message "Numero de puerto"
@@ -131,6 +131,10 @@ def getBrachName() {
     }
 }
 def getPort() {
-    def port = sh (returnStdout: true, script: 'cat $BRANCH').trim()
-    return port;
+    try {
+        def port = sh (returnStdout: true, script: 'cat $BRANCH').trim()
+        return port
+    } catch (Exception exc) {
+        return "NA"
+    }
 }
