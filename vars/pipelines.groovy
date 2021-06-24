@@ -70,7 +70,7 @@ def call(String tipo) {
                     }
                     steps {
                         sh 'echo $PORT'
-                        sh '/opt/$PROJECT_NAME/$BRANCH/service/./start.sh $PORT'
+                        sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh $PORT'
                     }
                 }
             }
