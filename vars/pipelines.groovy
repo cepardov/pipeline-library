@@ -10,7 +10,7 @@ def call(String tipo) {
             stages {
                 stage("Get data") {
                     environment {
-                        PORT = sh (returnStdout: true, script: 'cat $BRANCH').trim()
+                        PORT = getPort()
                     }
                     steps {
                         sh 'echo $PORT'
@@ -129,4 +129,8 @@ def getBrachName() {
         println('brach not recognized')
         return 'develop'
     }
+}
+def getPort() {
+    def port = sh (returnStdout: true, script: 'cat $BRANCH').trim()
+    return port;
 }
