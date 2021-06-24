@@ -66,8 +66,7 @@ def call(String tipo) {
                 }
                 stage('Start service') {
                     steps {
-                        sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh $PORT'
-                        sh 'sudo cat /opt/$PROJECT_NAME/$BRANCH/service/pid'
+                        sh 'sudo /opt/$PROJECT_NAME/$BRANCH/service/./start.sh $PORT'
                     }
                 }
             }
