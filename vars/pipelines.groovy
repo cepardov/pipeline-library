@@ -40,8 +40,7 @@ def call(String tipo) {
                 }
                 stage('Stopping Service') {
                     steps {
-                        sh 'pwd'
-                        sh 'ls'
+                        sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
                     }
                 }
                 stage('Create Directory') {
@@ -62,6 +61,11 @@ def call(String tipo) {
                         sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/service/stop.sh'
                         sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/startNodes.sh'
                         sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/stopNodes.sh'
+                    }
+                }
+                stage('Start service') {
+                    steps {
+                        sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh $PORT'
                     }
                 }
             }
