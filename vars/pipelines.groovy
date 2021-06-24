@@ -6,9 +6,13 @@ def call(String tipo) {
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
+                PORT = 9876
             }
             stages {
                 stage("Configuring pipeline") {
+                    when {
+                        expression { PORT != null }
+                    }
                     input {
                         message "Numero de puerto"
                         submitterParameter "8500"
