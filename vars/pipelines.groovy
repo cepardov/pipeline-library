@@ -22,7 +22,7 @@ def call(String tipo) {
                     }
                     input {
                         message "Numero de puerto"
-                        submitterParameter "8500"
+                        submitterParameter PORT
                         parameters {
                             string(name: 'PORT_TMP', defaultValue: '8500', description: 'Puerto usado por este servicio')
                         }
