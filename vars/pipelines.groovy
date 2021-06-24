@@ -41,27 +41,27 @@ def call(String tipo) {
                 }
                 stage('Stopping Service') {
                     steps {
-                        sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
+                        sh 'sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
                     }
                 }
                 stage('Create Directory') {
                     steps {
                         sh 'echo /opt/$PROJECT_NAME/$BRANCH'
-                        sh 'sudo mkdir -p /opt/$PROJECT_NAME/$BRANCH'
-                        sh 'sudo cp -r deploy/* /opt/$PROJECT_NAME/$BRANCH'
+                        sh 'mkdir -p /opt/$PROJECT_NAME/$BRANCH'
+                        sh 'cp -r deploy/* /opt/$PROJECT_NAME/$BRANCH'
                     }
                 }
                 stage('Installing service') {
                     steps {
-                        sh 'sudo cp build/libs/service.jar /opt/$PROJECT_NAME/$BRANCH/service/'
+                        sh 'cp build/libs/service.jar /opt/$PROJECT_NAME/$BRANCH/service/'
                     }
                 }
                 stage('Set Permissions') {
                     steps {
-                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
-                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/service/stop.sh'
-                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/startNodes.sh'
-                        sh 'sudo chmod +x /opt/$PROJECT_NAME/$BRANCH/stopNodes.sh'
+                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
+                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/service/stop.sh'
+                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/startNodes.sh'
+                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/stopNodes.sh'
                     }
                 }
                 stage('Start service') {
@@ -70,7 +70,7 @@ def call(String tipo) {
                     }
                     steps {
                         sh 'echo $PORT'
-                        sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh $PORT'
+                        sh 'sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh $PORT'
                     }
                 }
             }
