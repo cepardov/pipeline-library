@@ -42,7 +42,6 @@ def call(String tipo) {
                 stage('Stopping Service') {
                     steps {
                         sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
-                        sh 'sudo rm /opt/$PROJECT_NAME/$BRANCH/service/pid'
                     }
                 }
                 stage('Create Directory') {
