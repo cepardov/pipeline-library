@@ -6,12 +6,10 @@ def call(String tipo) {
             environment {
                 PROJECT_NAME = getProjectName()
                 BRANCH = getBrachName()
+                PORT = getPort()
             }
             stages {
                 stage("Configuring pipeline") {
-                    environment {
-                        PORT = getPort()
-                    }
                     steps {
                         sh 'echo $PORT'
                     }
