@@ -8,25 +8,12 @@ def call(String tipo) {
                 BRANCH = getBrachName()
             }
             stages {
-                stage("Get data") {
+                stage("Configuring pipeline") {
                     environment {
                         PORT = getPort()
                     }
                     steps {
                         sh 'echo $PORT'
-                    }
-                }
-                stage("Configuring pipeline") {
-                    if (verifiFile()) {
-                        sh 'echo $PORT'
-                    } else {
-                        input {
-                            message "Numero de puerto"
-                            submitterParameter '$PORT'
-                            parameters {
-                                string(name: 'PORT_TMP', defaultValue: '8500', description: 'Puerto usado por este servicio')
-                            }
-                        }
                     }
                 }
                 stage("Gradle Version") {
@@ -133,15 +120,6 @@ def getPort() {
         def port = sh (returnStdout: true, script: 'cat $BRANCH').trim()
         return port
     } catch (Exception exc) {
-        return "NA"
-    }
-}
-
-def verifiFile() {
-    try {
-        sh (returnStdout: true, script: 'cat $BRANCH').trim()
-        return true
-    } catch (Exception exc) {
-        return false
+        error "Debe definir el puerto de ejecución para este el ambiente $BRANCH"
     }
 }
