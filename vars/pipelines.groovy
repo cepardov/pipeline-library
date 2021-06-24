@@ -142,8 +142,8 @@ def getPort() {
 def verifiFile() {
     try {
         sh (returnStdout: true, script: 'cat $BRANCH').trim()
-        return true
-    } catch (Exception exc) {
         return false
+    } catch (Exception exc) {
+        return true
     }
 }
