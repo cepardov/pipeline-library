@@ -117,7 +117,7 @@ def getBrachName() {
 }
 def getPort() {
     try {
-        def port = sh (returnStdout: true, script: 'cat $BRANCH').trim()
+        def port = sh (returnStdout: true, script: 'cat environment/$BRANCH').trim()
         return port
     } catch (Exception exc) {
         error "Debe definir el puerto de ejecución para este el ambiente $BRANCH"
