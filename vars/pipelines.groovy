@@ -12,7 +12,7 @@ def call(String tipo) {
                     steps {
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
-                        sh 'echo ' + getPort()
+                        sh 'echo ' + getPort(BRANCH)
                     }
                 }
                 stage("Gradle Version") {
@@ -114,17 +114,14 @@ def getBrachName() {
         return 'develop'
     }
 }
-def getPort() {
-    def conf = readYaml file: "develop.yml"
-    String port = ""
-    if ( conf.server.port instanceof Integer ) {
-        println("1")
-        port = conf.server.port
+def getPort(String branch) {
+    println('Branch: ' + branch)
+    def conf = readYaml file: "deploy.yml"
+    def port = "8500"
+
+    if ( conf.${branch} != null) {
+        port = conf.${branch}.port
     }
-    if ( conf.server.port instanceof ArrayList ) {
-        println("2")
-        port = conf.server.port[0]
-    }
-    println(port)
+    println('port: ' + port)
     return port
 }
