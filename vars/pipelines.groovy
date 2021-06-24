@@ -56,7 +56,11 @@ def call(String tipo) {
                 }
                 stage('Stopping Service') {
                     steps {
-                        sh 'sudo sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
+                        sh '''
+#!/bin/bash
+cd /opt/$PROJECT_NAME/$BRANCH/service/
+sudo sh stop.sh
+'''
                     }
                 }
                 stage('Installing service') {
@@ -73,7 +77,6 @@ def call(String tipo) {
                         sh '''
 #!/bin/bash 
 cd /opt/$PROJECT_NAME/$BRANCH/service/
-pwd
 sudo sh start.sh $PORT
 '''
                     }
