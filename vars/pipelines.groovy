@@ -18,7 +18,7 @@ def call(String tipo) {
                 }
                 stage("Configuring pipeline") {
                     when {
-                        environment name: 'PORT', value: 'NA'
+                        expression { return verifiFile() }
                     }
                     input {
                         message "Numero de puerto"
@@ -136,5 +136,14 @@ def getPort() {
         return port
     } catch (Exception exc) {
         return "NA"
+    }
+}
+
+def verifiFile() {
+    try {
+        sh (returnStdout: true, script: 'cat $BRANCH').trim()
+        return true
+    } catch (Exception exc) {
+        return false
     }
 }
