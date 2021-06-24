@@ -9,10 +9,16 @@ def call(String tipo) {
             }
             stages {
                 stage("Configuring pipeline") {
+                    input {
+                        message "Numero de puerto"
+                        submitterParameter "8500"
+                        parameters {
+                            string(name: 'PORT', defaultValue: '8500', description: 'Puerto usado por este servicio')
+                        }
+                    }
                     steps {
                         sh 'echo $BRANCH'
                         sh 'echo $PROJECT_NAME'
-                        sh 'echo ' + getPort(BRANCH)
                     }
                 }
                 stage("Gradle Version") {
@@ -113,15 +119,4 @@ def getBrachName() {
         println('brach not recognized')
         return 'develop'
     }
-}
-def getPort(String branch) {
-    println('Branch: ' + branch)
-    def conf = readYaml file: "deploy.yml"
-    def port = "8500"
-
-    if ( conf.${branch} != null) {
-        port = conf.${branch}.port
-    }
-    println('port: ' + port)
-    return port
 }
