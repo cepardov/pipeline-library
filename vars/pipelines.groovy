@@ -17,18 +17,8 @@ def call(String tipo) {
                     }
                 }
                 stage("Configuring pipeline") {
-                    when {
-                        expression { return verifiFile() }
-                    }
-                    input {
-                        message "Numero de puerto"
-                        submitterParameter PORT
-                        parameters {
-                            string(name: 'PORT_TMP', defaultValue: '8500', description: 'Puerto usado por este servicio')
-                        }
-                    }
                     steps {
-                        sh 'echo $PORT_TMP > $BRANCH'
+                        verifiFile()
                     }
                 }
                 stage("Gradle Version") {
@@ -142,8 +132,13 @@ def getPort() {
 def verifiFile() {
     try {
         sh (returnStdout: true, script: 'cat $BRANCH').trim()
-        return false
     } catch (Exception exc) {
-        return true
+        input {
+            message "Numero de puerto"
+            submitterParameter '$PORT'
+            parameters {
+                string(name: 'PORT_TMP', defaultValue: '8500', description: 'Puerto usado por este servicio')
+            }
+        }
     }
 }
