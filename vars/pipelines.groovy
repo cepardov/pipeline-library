@@ -9,9 +9,11 @@ def call(String tipo) {
             }
             stages {
                 stage("Get data") {
-                    steps {
-                        sh "echo '9090' > $BRANCH"
+                    environment {
                         PORT = sh (returnStdout: true, script: 'cat $BRANCH').trim()
+                    }
+                    steps {
+                        sh 'echo $PORT'
                     }
                 }
                 stage("Configuring pipeline") {
@@ -22,12 +24,11 @@ def call(String tipo) {
                         message "Numero de puerto"
                         submitterParameter "8500"
                         parameters {
-                            string(name: 'PORT', defaultValue: '8500', description: 'Puerto usado por este servicio')
+                            string(name: 'PORT_TMP', defaultValue: '8500', description: 'Puerto usado por este servicio')
                         }
                     }
                     steps {
-                        sh 'echo $BRANCH'
-                        sh 'echo $PROJECT_NAME'
+                        sh 'echo $PORT_TMP > $BRANCH'
                     }
                 }
                 stage("Gradle Version") {
