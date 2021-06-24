@@ -41,27 +41,27 @@ def call(String tipo) {
                 }
                 stage('Create Directory') {
                     steps {
-                        sh 'echo /opt/$PROJECT_NAME/$BRANCH'
-                        sh 'mkdir -p /opt/$PROJECT_NAME/$BRANCH'
-                        sh 'cp -r deploy/* /opt/$PROJECT_NAME/$BRANCH'
+                        sh 'echo /api/$PROJECT_NAME/$BRANCH'
+                        sh 'mkdir -p /api/$PROJECT_NAME/$BRANCH'
+                        sh 'cp -r deploy/* /api/$PROJECT_NAME/$BRANCH'
                     }
                 }
                 stage('Set Permissions') {
                     steps {
-                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
-                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/service/stop.sh'
-                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/startNodes.sh'
-                        sh 'chmod +x /opt/$PROJECT_NAME/$BRANCH/stopNodes.sh'
+                        sh 'chmod +x /api/$PROJECT_NAME/$BRANCH/service/start.sh'
+                        sh 'chmod +x /api/$PROJECT_NAME/$BRANCH/service/stop.sh'
+                        sh 'chmod +x /api/$PROJECT_NAME/$BRANCH/startNodes.sh'
+                        sh 'chmod +x /api/$PROJECT_NAME/$BRANCH/stopNodes.sh'
                     }
                 }
                 stage('Stopping Service') {
                     steps {
-                        sh 'sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh'
+                        sh 'sh /api/$PROJECT_NAME/$BRANCH/service/start.sh'
                     }
                 }
                 stage('Installing service') {
                     steps {
-                        sh 'cp build/libs/service.jar /opt/$PROJECT_NAME/$BRANCH/service/'
+                        sh 'cp build/libs/service.jar /api/$PROJECT_NAME/$BRANCH/service/'
                     }
                 }
                 stage('Start service') {
@@ -70,7 +70,7 @@ def call(String tipo) {
                     }
                     steps {
                         sh 'echo $PORT'
-                        sh 'sh /opt/$PROJECT_NAME/$BRANCH/service/start.sh $PORT'
+                        sh 'sh /api/$PROJECT_NAME/$BRANCH/service/start.sh $PORT'
                     }
                 }
             }
